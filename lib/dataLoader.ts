@@ -3,35 +3,20 @@
  */
 
 import type { ExpenseData, BrandData, ChannelData, CategoryRow, ChannelButtonData } from './types';
+import expenseData from './expenseData';
 
 /**
- * 加载费用数据
+ * 加载费用数据（现在直接返回导入的数据）
  */
 export async function loadExpenseData(): Promise<ExpenseData> {
-  try {
-    const response = await fetch('/data/expenses.json', {
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (!response.ok) {
-      console.error('Failed to fetch data:', response.status, response.statusText);
-      throw new Error(`Failed to load expense data: ${response.status} ${response.statusText}`);
-    }
-    
-    const data = await response.json();
-    console.log('Data loaded successfully:', {
-      months: data.months?.length,
-      brands: Object.keys(data.brands || {}).length,
-    });
-    
-    return data;
-  } catch (error) {
-    console.error('Error loading expense data:', error);
-    throw error;
-  }
+  console.log('加载内置数据...');
+  console.log('数据详情:', {
+    months: expenseData.months?.length,
+    brands: Object.keys(expenseData.brands || {}).length,
+  });
+  
+  // 模拟异步加载（保持接口一致）
+  return Promise.resolve(expenseData);
 }
 
 /**
