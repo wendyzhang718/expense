@@ -54,3 +54,22 @@ export interface ChartDataPoint {
   name: string;
   value: number;
 }
+
+/**
+ * 零售数据类型定义
+ */
+
+// 零售数据单个月份数据点
+export interface SalesDataPoint {
+  month: string;        // 格式: "2025-01"
+  monthLabel: string;   // 格式: "25.01"
+  amount: number;       // 零售金额
+  tagAmount: number;    // 吊牌价
+}
+
+// 品牌零售数据
+export interface SalesData {
+  brand: string;
+  data: SalesDataPoint[];
+  total: number;
+}

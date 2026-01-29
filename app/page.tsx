@@ -10,6 +10,7 @@ import MonthSelector from '@/components/MonthSelector';
 import ChannelButtons from '@/components/ChannelButtons';
 import ExpenseTable from '@/components/ExpenseTable';
 import ExpenseChart from '@/components/ExpenseChart';
+import SalesChart from '@/components/SalesChart';
 import {
   loadExpenseData,
   getBrandNames,
@@ -211,6 +212,14 @@ export default function Home() {
             </div>
           </div>
         )}
+
+        {/* 零售数据图表 */}
+        <div className="mt-8">
+          <h2 className="text-xl font-semibold text-gray-100 mb-4">
+            零售数据
+          </h2>
+          <SalesChart brand={selectedBrand} />
+        </div>
       </main>
 
       {/* Footer */}
