@@ -34,8 +34,10 @@ export default function Home() {
 
   // 加载数据
   useEffect(() => {
+    console.log('开始加载数据...');
     loadExpenseData()
       .then((loadedData) => {
+        console.log('数据加载成功:', loadedData);
         setData(loadedData);
         
         // 设置默认品牌和月份
@@ -52,7 +54,8 @@ export default function Home() {
         setLoading(false);
       })
       .catch((err) => {
-        setError(err.message);
+        console.error('数据加载失败:', err);
+        setError(`数据加载失败: ${err.message}`);
         setLoading(false);
       });
   }, []);
@@ -101,10 +104,28 @@ export default function Home() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="text-red-500 text-xl mb-2">加载失败</div>
-          <div className="text-gray-400">{error}</div>
+      <div className="min-h-screen flex items-center justify-center px-4">
+        <div className="text-center max-w-2xl">
+          <div className="text-red-500 text-xl mb-4">❌ 数据加载失败</div>
+          <div className="text-gray-400 mb-4">{error}</div>
+          <div className="text-sm text-gray-500 bg-gray-800 p-4 rounded-lg text-left">
+            <p className="font-semibold mb-2">可能的原因：</p>
+            <ul className="list-disc list-inside space-y-1">
+              <li>数据文件 /data/expenses.json 不存在</li>
+              <li>文件格式错误</li>
+              <li>网络连接问题</li>
+            </ul>
+            <p className="mt-4 font-semibold">解决方法：</p>
+            <p>1. 检查浏览器控制台（F12）查看详细错误</p>
+            <p>2. 确认数据文件已正确部署</p>
+            <p>3. 刷新页面重试（Ctrl + Shift + R）</p>
+          </div>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-6 px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
+          >
+            重新加载
+          </button>
         </div>
       </div>
     );

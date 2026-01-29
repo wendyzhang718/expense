@@ -8,11 +8,30 @@ import type { ExpenseData, BrandData, ChannelData, CategoryRow, ChannelButtonDat
  * 加载费用数据
  */
 export async function loadExpenseData(): Promise<ExpenseData> {
-  const response = await fetch('/data/expenses.json');
-  if (!response.ok) {
-    throw new Error('Failed to load expense data');
+  try {
+    const response = await fetch('/data/expenses.json', {
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      console.error('Failed to fetch data:', response.status, response.statusText);
+      throw new Error(`Failed to load expense data: ${response.status} ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    console.log('Data loaded successfully:', {
+      months: data.months?.length,
+      brands: Object.keys(data.brands || {}).length,
+    });
+    
+    return data;
+  } catch (error) {
+    console.error('Error loading expense data:', error);
+    throw error;
   }
-  return response.json();
 }
 
 /**
