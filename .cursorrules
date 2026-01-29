@@ -1,0 +1,26 @@
+# Cursor Rules for Expense Dashboard
+
+## Project Context
+This is a Next.js 15 expense dashboard with TypeScript and Tailwind CSS.
+- Use dark theme colors (gray-900, gray-800, etc.)
+- All amounts should be formatted with thousand separators
+- Data is loaded from `/public/data/expenses.json`
+
+## Code Style
+- Use TypeScript for all files
+- Use functional components with hooks
+- Use 'use client' directive for client components
+- Follow Next.js 15 App Router conventions
+- Use Tailwind CSS classes for styling
+
+## Component Guidelines
+- Keep components focused and reusable
+- Use proper TypeScript types from `lib/types.ts`
+- Handle loading and error states
+- Ensure responsive design (mobile and desktop)
+
+## Data Handling
+- Use utility functions from `lib/dataLoader.ts`
+- Format amounts with `formatAmount()`
+- Format percentages with `formatPercentage()`
+- Sort data by amount in descending order
